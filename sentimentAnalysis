@@ -1,0 +1,38 @@
+import os
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "PATH TO .JSON FILE"
+# Imports the Google Cloud client library
+from google.cloud import language
+from google.cloud.language import enums
+from google.cloud.language import types
+from tkinter import messagebox
+from tkinter import filedialog
+import tkinter as tk
+# Instantiates a client
+client = language.LanguageServiceClient()
+
+
+# The text to analyze
+#messagebox.showinfo("Choose Text to analyze.)
+
+text = input("Paste some text in here and see what's really going on!\n")
+
+
+
+# text = u"I think you should really consider blowing your candles out you beautiful little teddy bear.."
+document = types.Document(
+    content=text,
+    type=enums.Document.Type.PLAIN_TEXT)
+
+# Detects the sentiment of the text
+sentiment = client.analyze_sentiment(document=document).document_sentiment
+response = client.analyze_entities(document=document,
+encoding_type='UTF32',)
+entities = response.entities
+for entity in response.entities:
+    print('=' * 20)
+    print('         name: {0}'.format(entity.name))
+   # print('         type: {0}'.format(entity.type)) # this generating errors.
+    print('     metadata: {0}'.format(entity.metadata))
+    print('     salience: {0}'.format(entity.salience))
+print('Text: {}'.format(text))
+print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
