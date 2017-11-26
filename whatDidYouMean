@@ -3,14 +3,14 @@ from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 from tkinter import messagebox
-from tkinter import filedialog
+from tkinter import filedialogjson
 import tkinter as tk
 import re
 import string
 import os
 import matplotlib.pyplot as plt
 #gives permission to access my APIs and they are all setup to only take orders from my computers IP
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/nichodeturbo/Downloads/setheggerrocks-78d06073081f.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "PATH TO JSON FILE"
 
 # Instantiates a client
 client = language.LanguageServiceClient()
